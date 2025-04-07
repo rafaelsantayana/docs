@@ -1,0 +1,63 @@
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { ShoppingCart } from "lucide-react";
+import { motion } from "framer-motion";
+
+const products = [
+  {
+    name: "Massageador Elétrico Cervical Pro",
+    price: "R$199,90",
+    image: "https://cdn.shopify.com/s/files/1/0661/9630/7113/files/massageador_480x480.jpg"
+  },
+  {
+    name: "Smartwatch Fitness Pro Max",
+    price: "R$289,90",
+    image: "https://cdn.shopify.com/s/files/1/0661/9630/7113/files/smartwatch_480x480.jpg"
+  },
+  {
+    name: "Garrafa Inteligente Térmica LED",
+    price: "R$149,90",
+    image: "https://cdn.shopify.com/s/files/1/0661/9630/7113/files/garrafa_led_480x480.jpg"
+  }
+];
+
+export default function Home() {
+  return (
+    <div className="min-h-screen bg-white px-4 py-8">
+      <h1 className="text-4xl font-bold text-center mb-6">FlashTrend</h1>
+      <p className="text-center text-gray-600 mb-10">Tecnologia e bem-estar direto na sua porta</p>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        {products.map((product, index) => (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: index * 0.2 }}
+            whileHover={{ scale: 1.03 }}
+            className="transition-transform duration-300"
+          >
+            <Card className="rounded-2xl shadow-md hover:shadow-xl transition">
+              <img
+                src={product.image}
+                alt={`Imagem do produto: ${product.name}`}
+                loading="lazy"
+                className="rounded-t-2xl w-full h-60 object-cover"
+              />
+              <CardContent className="p-4">
+                <h2 className="text-xl font-semibold mb-2">{product.name}</h2>
+                <p className="text-lg font-bold text-emerald-600 mb-4">{product.price}</p>
+                <motion.div whileHover={{ scale: 1.05 }}>
+                  <Button className="w-full bg-emerald-500 hover:bg-emerald-600 text-white">
+                    <ShoppingCart className="mr-2 h-5 w-5" /> Comprar Agora
+                  </Button>
+                </motion.div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
